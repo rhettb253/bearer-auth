@@ -4,3 +4,4 @@ Use a "Bearer Token" to re-authenticate with a server following a successful log
 
 ## Process Whiteboard
 
+<img src='./middlewareauths.png'>
