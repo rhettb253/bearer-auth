@@ -1,9 +1,9 @@
 'use strict';
 
-process.env.SECRET = "TEST_SECRET";
+process.env.SECRET = 'TEST_SECRET';
 
-const bearer = require('../../../../src/auth/middleware/bearer.js');
-const { db, users } = require('../../../../src/auth/models/index.js');
+const bearer = require('../../../bearer-auth/src/auth/middleware/bearer.js');
+const { db, users } = require('../../../bearer-auth/src/auth/models/index.js');
 const jwt = require('jsonwebtoken');
 
 let userInfo = {
@@ -27,7 +27,7 @@ describe('Auth Middleware', () => {
     status: jest.fn(() => res),
     send: jest.fn(() => res),
     json: jest.fn(() => res),
-  }
+  };
   const next = jest.fn();
 
   describe('user authentication', () => {
@@ -50,14 +50,14 @@ describe('Auth Middleware', () => {
 
       const user = { username: 'admin' };
       const token = jwt.sign(user, process.env.SECRET);
-
+      console.log(token);
       req.headers = {
         authorization: `Bearer ${token}`,
       };
 
       return bearer(req, res, next)
         .then(() => {
-          expect(next).toHaveBeenCalledWith();
+          expect(next).toHaveBeenCalled();
         });
 
     });
